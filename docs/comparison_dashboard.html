@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Crecimiento histórico de empresas APL</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <style>
+        body { font-family: "Segoe UI", Tahoma, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 24px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
+        h1 { text-align: center; margin-bottom: 8px; }
+        p.description { text-align: center; margin-top: 0; margin-bottom: 24px; color: #4a5568; }
+        #container { height: 640px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Crecimiento histórico de empresas APL</h1>
+        <p class="description">Número de empresas que han adherido o certificado Acuerdos de Producción Limpia desde 2002. Se utiliza una escala logarítmica para resaltar saltos de crecimiento.</p>
+        <div id="container"></div>
+    </div>
+    <script>
+        // Datos combinados desde data/processed/yearly_summary.csv
+        const years = [2002, 2004, 2006, 2007, 2008, 2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+        const totals = [2, 9, 8, 7, 102, 16, 4, 29, 68, 1, 32, 7, 18, 1, 3, 40, 13, 26, 14, 12];
+
+        Highcharts.chart('container', {
+            title: {
+                text: 'Empresas por año en escala logarítmica'
+            },
+            accessibility: {
+                point: {
+                    valueDescriptionFormat: '{xDescription}{separator}{value} empresa(s)'
+                }
+            },
+            xAxis: {
+                title: {
+                    text: 'Año'
+                },
+                categories: years
+            },
+            yAxis: {
+                type: 'logarithmic',
+                title: {
+                    text: 'Empresas registradas'
+                }
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br />',
+                pointFormat: '{point.y} empresa(s)'
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Empresas',
+                data: totals,
+                color: 'var(--highcharts-color-1, #2caffe)'
+            }]
+        });
+    </script>
+</body>
+</html>

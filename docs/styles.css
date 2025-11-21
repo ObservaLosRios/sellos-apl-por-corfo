@@ -1,0 +1,711 @@
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    background-color: #ffffff;
+    color: #2c3e50;
+}
+
+/* Header principal */
+.main-header {
+    background: #ffffff;
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 2px solid #e8e8e8;
+    position: relative;
+}
+
+.logos-container {
+    position: relative;
+    height: 85px;
+    margin-bottom: 10px;
+}
+
+/* Logo en esquina superior derecha - ahora movido a la izquierda junto al otro */
+.header-logo {
+    position: absolute;
+    top: 15px;
+    left: 200px;
+    height: 55px;
+    width: auto;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+/* Logo Universidad Austral - Parte superior izquierda */
+.header-logo-left {
+    position: absolute;
+    top: 0;
+    left: 80px;
+    height: 85px;
+    width: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.header-logo:hover, .header-logo-left:hover {
+    opacity: 1;
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+}
+
+.main-title {
+    font-size: 28px;
+    font-weight: normal;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #666;
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+/* Navegación */
+.nav-container {
+    background: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #2c3e50;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.nav-link:hover, .nav-link.active {
+    background-color: #1B4F72;
+    color: white;
+}
+
+/* Container principal */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Secciones */
+.section {
+    margin-bottom: 80px;
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #2c3e50;
+    border-bottom: 3px solid #1B4F72;
+    padding-bottom: 10px;
+    display: inline-block;
+    width: 100%;
+}
+
+.chart-section {
+    margin-bottom: 60px;
+}
+
+.chart-title {
+    font-size: 18px;
+    font-weight: normal;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: 'Georgia', serif;
+}
+
+/* Contenedores de gráficos */
+.trends-container, .empresas-container, .rubros-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Mejoras para las visualizaciones */
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.chart-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 8px;
+}
+
+/* Placeholder para gráficos */
+.chart-placeholder {
+    background: #f8f9fa;
+    border: 2px dashed #e8e8e8;
+    border-radius: 4px;
+    padding: 60px 30px;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin: 20px 0;
+}
+
+.chart-placeholder .placeholder-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+    opacity: 0.5;
+}
+
+/* Tooltip */
+.tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 12px;
+    border-radius: 4px;
+    font-family: 'Georgia', serif;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 1000;
+    display: none;
+    white-space: nowrap;
+}
+
+/* Footer */
+.footer {
+    background: #f8f9fa;
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 2px solid #e8e8e8;
+    margin-top: 60px;
+}
+
+.footer-logo {
+    height: 80px;
+    width: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-logo:hover {
+    opacity: 1;
+}
+
+.footer-text {
+    color: #666;
+    font-size: 14px;
+}
+
+/* =============================================================================
+   ESTILOS PARA LA PLANTILLA
+   ============================================================================= */
+
+/* Botón flotante de configuración */
+.floating-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #1B4F72;
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.floating-btn:hover {
+    background: #2563eb;
+    transform: scale(1.1);
+}
+
+/* Modal de configuración */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.config-section {
+    margin-bottom: 30px;
+}
+
+.config-section h3 {
+    color: #1B4F72;
+    margin-bottom: 15px;
+    font-family: 'Georgia', serif;
+}
+
+.config-section label {
+    display: block;
+    margin-bottom: 5px;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.config-section input,
+.config-section textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e8e8e8;
+    border-radius: 6px;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.config-section input:focus,
+.config-section textarea:focus {
+    outline: none;
+    border-color: #1B4F72;
+    box-shadow: 0 0 0 3px rgba(27, 79, 114, 0.1);
+}
+
+#data-input {
+    height: 120px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 12px;
+}
+
+#footer-input {
+    height: 80px;
+}
+
+.btn {
+    background: #1B4F72;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(27, 79, 114, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Mensajes de estado */
+.status-message {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.status-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.status-info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .trends-container, .empresas-container, .rubros-container {
+        max-width: 95%;
+    }
+    
+    .container {
+        max-width: 95%;
+    }
+    
+    /* Ajustar logos para pantallas medianas */
+    .header-logo {
+        left: 180px;
+        height: 50px;
+    }
+    
+    .header-logo-left {
+        left: 70px;
+        height: 75px;
+    }
+}
+
+@media (max-width: 1024px) {
+    /* Ajustar para tablets */
+    .logos-container {
+        height: 75px;
+    }
+    
+    .header-logo {
+        left: 160px;
+        height: 45px;
+        top: 10px;
+    }
+    
+    .header-logo-left {
+        left: 60px;
+        height: 70px;
+        top: 0;
+    }
+    
+    .main-title {
+        font-size: 24px;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        padding: 30px 20px 35px 20px;
+    }
+    
+    .logos-container {
+        height: 60px;
+        margin-bottom: 15px;
+    }
+    
+    /* Mover logos a las esquinas en tablets */
+    .header-logo {
+        height: 35px;
+        top: 10px;
+        left: auto;
+        right: 20px;
+    }
+    
+    .header-logo-left {
+        height: 55px;
+        top: 0;
+        left: 20px;
+    }
+    
+    .main-title {
+        font-size: 22px;
+        margin-bottom: 10px;
+        margin-top: 0;
+        padding: 0 15px;
+        line-height: 1.3;
+    }
+    
+    .subtitle {
+        font-size: 15px;
+        padding: 0 15px;
+    }
+    
+    .section-title {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .nav-link {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .container {
+        padding: 20px 10px;
+    }
+    
+    .chart-container {
+        height: 500px !important;
+        margin-bottom: 30px;
+    }
+    
+    .chart-title {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    
+    .footer-logo {
+        height: 65px;
+        margin-top: 15px;
+    }
+    
+    .footer {
+        padding: 30px 15px;
+    }
+    
+    /* Modal responsive */
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
+        padding: 20px;
+    }
+    
+    .floating-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-header {
+        padding: 20px 15px 25px 15px;
+    }
+    
+    .logos-container {
+        height: auto;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    /* Reorganizar logos en línea horizontal para móviles */
+    .header-logo, .header-logo-left {
+        position: static;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 8px;
+    }
+    
+    .header-logo {
+        height: 30px;
+    }
+    
+    .header-logo-left {
+        height: 45px;
+    }
+    
+    .main-title {
+        font-size: 20px;
+        padding: 0 10px;
+        margin-top: 0;
+        clear: both;
+    }
+    
+    .subtitle {
+        font-size: 14px;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-header {
+        padding: 15px 10px 20px 10px;
+    }
+    
+    .logos-container {
+        margin-bottom: 15px;
+    }
+    
+    /* Logos más pequeños en móviles pequeños */
+    .header-logo {
+        height: 25px;
+        margin: 0 6px;
+    }
+    
+    .header-logo-left {
+        height: 40px;
+        margin: 0 6px;
+    }
+    
+    .main-title {
+        font-size: 18px;
+        padding: 0 10px;
+        line-height: 1.2;
+    }
+    
+    .subtitle {
+        font-size: 13px;
+        padding: 0 10px;
+    }
+    
+    .section-title {
+        font-size: 18px;
+        padding: 0 10px;
+    }
+    
+    .nav-links {
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .nav-link {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+    
+    .container {
+        padding: 15px 5px;
+    }
+    
+    .chart-container {
+        height: 400px !important;
+        border-radius: 4px;
+    }
+    
+    .chart-title {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    
+    .footer {
+        padding: 25px 10px;
+    }
+    
+    .footer-text {
+        font-size: 12px;
+    }
+    
+    .footer-logo {
+        height: 50px;
+        margin-top: 12px;
+    }
+    
+    /* Modal más pequeño en móviles */
+    .modal-content {
+        margin: 5% auto;
+        width: 98%;
+        padding: 15px;
+    }
+    
+    .floating-btn {
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 360px) {
+    /* Pantallas muy pequeñas */
+    .main-header {
+        padding: 12px 8px 18px 8px;
+    }
+    
+    .logos-container {
+        margin-bottom: 12px;
+    }
+    
+    .header-logo {
+        height: 20px;
+        margin: 0 4px;
+    }
+    
+    .header-logo-left {
+        height: 35px;
+        margin: 0 4px;
+    }
+    
+    .main-title {
+        font-size: 16px;
+        padding: 0 8px;
+    }
+    
+    .subtitle {
+        font-size: 12px;
+        padding: 0 8px;
+    }
+    
+    .nav-link {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .container {
+        padding: 10px 3px;
+    }
+}

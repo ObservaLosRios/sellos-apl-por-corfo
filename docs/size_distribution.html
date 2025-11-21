@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Empresas e instalaciones por tamaño de empresa</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/variwide.js"></script>
+    <style>
+        body { font-family: "Segoe UI", Tahoma, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 24px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
+        h1 { text-align: center; margin-bottom: 8px; }
+        p.description { text-align: center; margin-top: 0; margin-bottom: 24px; color: #4a5568; }
+        #container { height: 620px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Empresas e instalaciones por tamaño de empresa</h1>
+        <p class="description">El ancho de cada columna representa el número de instalaciones y la altura el total de empresas registradas.</p>
+        <div id="container"></div>
+    </div>
+    <script>
+        const sizeData = [
+            ['Pequeña', 119, 120],
+            ['Micro', 103, 107],
+            ['Mediana', 43, 48],
+            ['Grande', 41, 79],
+            ['SSPP', 5, 5]
+        ];
+
+        Highcharts.chart('container', {
+            chart: {
+                type: 'variwide'
+            },
+            title: { text: null },
+            subtitle: { text: null },
+            xAxis: {
+                type: 'category'
+            },
+            caption: {
+                text: 'Columnas más anchas indican más instalaciones registradas en el segmento.'
+            },
+            legend: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Empresas',
+                data: sizeData,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y} empresas'
+                },
+                tooltip: {
+                    pointFormat: 'Empresas: <b>{point.y}</b><br>' +
+                        'Instalaciones: <b>{point.z}</b><br>'
+                },
+                colorByPoint: true,
+                borderRadius: 3
+            }]
+        });
+    </script>
+</body>
+</html>

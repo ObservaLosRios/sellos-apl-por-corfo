@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Número de sellos entregados por CORFO en APL</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/variwide.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logos-container">
+            <img src="thumbnail_Logo observa.png" alt="Universidad Austral de Chile - Centro de Estudios Regionales" class="header-logo-left">
+            <img src="thumbnail_images.png" alt="Logo Región" class="header-logo">
+        </div>
+        <div class="header-content">
+            <h1 class="main-title" id="main-title">Número de sellos entregados por CORFO en Acuerdos de Producción Limpia (APL)</h1>
+            <p class="subtitle" id="subtitle">Universidad Austral de Chile · Centro de Estudios Regionales</p>
+        </div>
+    </header>
+
+    <nav class="nav-container">
+        <div class="nav-links" id="nav-links">
+            <a class="nav-link" data-section="sectores-economicos" href="#">Participación sectorial</a>
+            <a class="nav-link" data-section="distribucion-general" href="#">Distribución de registros</a>
+            <a class="nav-link" data-section="tamano-empresas" href="#">Tamaño de empresa</a>
+            <a class="nav-link" data-section="crecimiento-historico" href="#">Crecimiento histórico</a>
+            <a class="nav-link" data-section="series-ambito" href="#">Series por ámbito</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section id="distribucion-general" class="section">
+            <h2 class="section-title">Distribución acumulada de instalaciones y empresas</h2>
+            <p class="description">Totales consolidados de instalaciones y empresas que han adherido o certificado Acuerdos de Producción Limpia.</p>
+            <div id="chart-distribucion" style="height: 580px;"></div>
+        </section>
+
+        <section id="sectores-economicos" class="section active">
+            <h2 class="section-title">Participación por sector económico</h2>
+            <p class="description">Distribución porcentual de instalaciones en adhesión y certificación combinadas para los principales sectores económicos.</p>
+            <div id="chart-sectores" style="height: 640px;"></div>
+        </section>
+
+        <section id="tamano-empresas" class="section">
+            <h2 class="section-title">Empresas e instalaciones por tamaño de empresa</h2>
+            <p class="description">El ancho de cada columna representa el número de instalaciones y la altura el total de empresas registradas.</p>
+            <div id="chart-tamano" style="height: 640px;"></div>
+        </section>
+
+        <section id="crecimiento-historico" class="section">
+            <h2 class="section-title">Crecimiento histórico de empresas APL</h2>
+            <p class="description">Número de empresas que han adherido o certificado APL desde 2002. Se utiliza escala logarítmica para resaltar los saltos de crecimiento.</p>
+            <div id="chart-crecimiento" style="height: 600px;"></div>
+        </section>
+
+        <section id="series-ambito" class="section">
+            <h2 class="section-title">Empresas adheridas y certificadas por año</h2>
+            <p class="description">Comparativo entre empresas que firmaron acuerdos de adhesión y las que obtuvieron certificación para cada año con datos del registro procesado CORFO.</p>
+            <div id="chart-series" style="height: 560px;"></div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p class="footer-text" id="footer-text">
+            Observatorio de Sellos APL · Universidad Austral de Chile - Centro de Estudios Regionales
+        </p>
+        <img src="thumbnail_logo cer.png" alt="Universidad Austral de Chile - Centro de Estudios Regionales" class="footer-logo">
+    </footer>
+
+    <script>
+        const chartsBySection = {
+            'distribucion-general': [],
+            'sectores-economicos': [],
+            'tamano-empresas': [],
+            'crecimiento-historico': [],
+            'series-ambito': []
+        };
+
+        const distributionCategories = ['Adhesión anual', 'Certificación anual'];
+        const distributionInstalaciones = [359, 120];
+        const distributionEmpresas = [313, 99];
+
+        const chartDistribucion = Highcharts.chart('chart-distribucion', {
+            chart: { type: 'column' },
+            title: { text: null },
+            xAxis: { categories: distributionCategories, crosshair: true },
+            yAxis: {
+                min: 0,
+                title: { text: 'Registros acumulados' },
+                stackLabels: {
+                    enabled: true,
+                    style: { fontWeight: '600', color: '#2d3748' }
+                }
+            },
+            legend: {
+                align: 'left',
+                x: 60,
+                verticalAlign: 'top',
+                y: 40,
+                floating: true,
+                backgroundColor: '#ffffff',
+                borderColor: '#cccccc',
+                borderWidth: 1,
+                shadow: false
+            },
+            tooltip: {
+                headerFormat: '<b>{point.key}</b><br/>',
+                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                    dataLabels: { enabled: true, format: '{point.y} registros' },
+                    borderRadius: 4,
+                    pointPadding: 0.1
+                }
+            },
+            colors: ['#0ea5e9', '#7c3aed'],
+            credits: { enabled: false },
+            series: [
+                { name: 'Instalaciones', data: distributionInstalaciones },
+                { name: 'Empresas', data: distributionEmpresas }
+            ]
+        });
+        chartsBySection['distribucion-general'].push(chartDistribucion);
+
+        const sectorLabels = ['Manufactureras', 'Agro, pesca y silvicultura', 'Alojamiento y Comidas', 'Comercio', 'Agua Potable', 'Construcción', 'Enseñanza'];
+        const sectorAdhesion = [166, 118, 34, 14, 18, 6, 3];
+        const sectorCertification = [84, 27, 1, 6, 0, 0, 2];
+        const sectorTotals = sectorLabels.map((sector, index) => ({
+            name: sector,
+            total: sectorAdhesion[index] + sectorCertification[index]
+        }));
+        const sectorGrandTotal = sectorTotals.reduce((sum, item) => sum + item.total, 0);
+        const sectorPieData = sectorTotals.map((item, index) => ({
+            name: item.name,
+            y: +(item.total / sectorGrandTotal * 100).toFixed(2),
+            sliced: index === 0,
+            selected: index === 0,
+            custom: { registros: item.total }
+        }));
+
+        const chartSectores = Highcharts.chart('chart-sectores', {
+            chart: { type: 'pie' },
+            title: { text: null },
+            tooltip: {
+                pointFormat: 'Participación: <b>{point.percentage:.1f}%</b><br/>Registros: <b>{point.custom.registros}</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: { enabled: false },
+                    showInLegend: true
+                }
+            },
+            credits: { enabled: false },
+            series: [{ name: 'Participación', colorByPoint: true, data: sectorPieData }]
+        });
+        chartsBySection['sectores-economicos'].push(chartSectores);
+
+        const sizeData = [
+            ['Pequeña', 119, 120],
+            ['Micro', 103, 107],
+            ['Mediana', 43, 48],
+            ['Grande', 41, 79],
+            ['SSPP', 5, 5]
+        ];
+
+        const chartTamano = Highcharts.chart('chart-tamano', {
+            chart: { type: 'variwide' },
+            title: { text: null },
+            xAxis: { type: 'category' },
+            caption: { text: 'Columnas más anchas indican más instalaciones registradas en el segmento.' },
+            legend: { enabled: false },
+            credits: { enabled: false },
+            series: [{
+                name: 'Empresas',
+                data: sizeData,
+                dataLabels: { enabled: true, format: '{point.y} empresas' },
+                tooltip: {
+                    pointFormat: 'Empresas: <b>{point.y}</b><br/>Instalaciones: <b>{point.z}</b><br>'
+                },
+                colorByPoint: true,
+                borderRadius: 3
+            }]
+        });
+        chartsBySection['tamano-empresas'].push(chartTamano);
+
+        const growthYears = [2002, 2004, 2006, 2007, 2008, 2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+        const growthTotals = [2, 9, 8, 7, 102, 16, 4, 29, 68, 1, 32, 7, 18, 1, 3, 40, 13, 26, 14, 12];
+
+        const chartCrecimiento = Highcharts.chart('chart-crecimiento', {
+            title: { text: 'Empresas por año en escala logarítmica' },
+            xAxis: { title: { text: 'Año' }, categories: growthYears },
+            yAxis: { type: 'logarithmic', title: { text: 'Empresas registradas' } },
+            tooltip: { headerFormat: '<b>{series.name}</b><br />', pointFormat: '{point.y} empresa(s)' },
+            credits: { enabled: false },
+            series: [{ name: 'Empresas', data: growthTotals, color: '#2caffe' }]
+        });
+        chartsBySection['crecimiento-historico'].push(chartCrecimiento);
+
+        const seriesYears = [2002, 2004, 2006, 2007, 2008, 2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+        const adhesionSeries = [2, 9, 0, 7, 100, 16, 0, 7, 50, 0, 32, 6, 17, 1, 3, 38, 9, 6, 9, 1];
+        const certificationSeries = [0, 0, 8, 0, 2, 0, 4, 22, 18, 1, 0, 1, 1, 0, 0, 2, 4, 20, 5, 11];
+
+        const chartSeries = Highcharts.chart('chart-series', {
+            title: { text: null },
+            yAxis: { title: { text: 'Número de empresas' } },
+            xAxis: {
+                categories: seriesYears,
+                labels: { rotation: -45 },
+                accessibility: { description: 'Range: 2002 a 2025' }
+            },
+            legend: { layout: 'vertical', align: 'right', verticalAlign: 'middle' },
+            plotOptions: { series: { label: { connectorAllowed: false }, marker: { enabled: true } } },
+            tooltip: { shared: true, valueSuffix: ' empresas' },
+            series: [
+                { name: 'Adhesión', data: adhesionSeries },
+                { name: 'Certificación', data: certificationSeries }
+            ],
+            responsive: {
+                rules: [{
+                    condition: { maxWidth: 600 },
+                    chartOptions: {
+                        legend: { layout: 'horizontal', align: 'center', verticalAlign: 'bottom' }
+                    }
+                }]
+            },
+            credits: { enabled: false }
+        });
+        chartsBySection['series-ambito'].push(chartSeries);
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section');
+
+        function showSection(targetId) {
+            sections.forEach((section) => {
+                section.classList.toggle('active', section.id === targetId);
+            });
+            navLinks.forEach((link) => {
+                link.classList.toggle('active', link.dataset.section === targetId);
+            });
+            (chartsBySection[targetId] || []).forEach((chartInstance) => {
+                if (chartInstance && typeof chartInstance.reflow === 'function') {
+                    chartInstance.reflow();
+                }
+            });
+            window.scrollTo({ top: document.querySelector('.nav-container').offsetTop, behavior: 'smooth' });
+        }
+
+        navLinks.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                showSection(link.dataset.section);
+            });
+        });
+
+        showSection('sectores-economicos');
+    </script>
+</body>
+</html>

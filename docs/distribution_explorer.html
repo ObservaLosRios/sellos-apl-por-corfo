@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Explorador de distribuciones APL</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <style>
+        body { font-family: "Segoe UI", Tahoma, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 24px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
+        h1 { text-align: center; margin-bottom: 8px; }
+        p.description { text-align: center; margin-top: 0; margin-bottom: 24px; color: #4a5568; }
+        #container { height: 640px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Explorador de distribuciones APL</h1>
+        <p class="description">Totales consolidados de instalaciones y empresas que han adherido o certificado Acuerdos de Producción Limpia.</p>
+        <div id="container"></div>
+    </div>
+    <script>
+        // Datos obtenidos de data/processed/adhesion_by_year.csv y data/processed/certification_by_year.csv
+        const categories = ['Adhesión anual', 'Certificación anual'];
+        const instalaciones = [359, 120];
+        const empresas = [313, 99];
+
+        Highcharts.chart('container', {
+            chart: {
+                type: 'column'
+            },
+            title: { text: null },
+            subtitle: { text: null },
+            xAxis: {
+                categories,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Registros acumulados'
+                },
+                stackLabels: {
+                    enabled: true,
+                    style: {
+                        fontWeight: '600',
+                        color: '#2d3748'
+                    }
+                }
+            },
+            legend: {
+                align: 'left',
+                x: 60,
+                verticalAlign: 'top',
+                y: 40,
+                floating: true,
+                backgroundColor: 'var(--highcharts-background-color, #ffffff)',
+                borderColor: 'var(--highcharts-neutral-color-20, #cccccc)',
+                borderWidth: 1,
+                shadow: false
+            },
+            tooltip: {
+                headerFormat: '<b>{point.key}</b><br/>',
+                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y} registros'
+                    },
+                    borderRadius: 4,
+                    pointPadding: 0.1
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            colors: ['#0ea5e9', '#7c3aed'],
+            series: [{
+                name: 'Instalaciones',
+                data: instalaciones
+            }, {
+                name: 'Empresas',
+                data: empresas
+            }]
+        });
+    </script>
+</body>
+</html>
