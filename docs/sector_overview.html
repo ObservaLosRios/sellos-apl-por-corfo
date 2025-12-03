@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <title>Participación por sector económico</title>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <style>
         body { font-family: "Segoe UI", Tahoma, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
         .container { max-width: 1200px; margin: 0 auto; background: white; padding: 24px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
@@ -54,7 +57,8 @@
             },
             title: { text: null },
             subtitle: {
-                text: 'Fuente: Consejo Nacional de Producción Limpia'
+                text: 'Fuente: Consejo Nacional de Producción Limpia',
+                y: 10
             },
             tooltip: {
                 pointFormat: 'Participación: <b>{point.percentage:.1f}%</b><br/>Registros: <b>{point.custom.registros}</b>'
@@ -72,6 +76,24 @@
                         enabled: false
                     },
                     showInLegend: true
+                }
+            },
+            exporting: {
+                enabled: true,
+                buttons: {
+                    contextButton: {
+                        menuItems: [
+                            'viewFullscreen',
+                            'printChart',
+                            'separator',
+                            'downloadPNG',
+                            'downloadJPEG',
+                            'downloadSVG',
+                            'downloadCSV',
+                            'downloadXLS',
+                            'viewData'
+                        ]
+                    }
                 }
             },
             credits: {
