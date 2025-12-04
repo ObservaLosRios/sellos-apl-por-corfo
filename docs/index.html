@@ -25,43 +25,42 @@
 
     <nav class="nav-container">
         <div class="nav-links" id="nav-links">
+            <a class="nav-link" data-section="sectores-economicos" href="#">Participación sectorial</a>
+            <a class="nav-link" data-section="distribucion-general" href="#">Distribución de registros</a>
+            <a class="nav-link" data-section="tamano-empresas" href="#">Tamaño de empresa</a>
             <a class="nav-link" data-section="crecimiento-historico" href="#">Crecimiento histórico</a>
             <a class="nav-link" data-section="series-ambito" href="#">Series por ámbito</a>
-            <a class="nav-link" data-section="sectores-economicos" href="#">Participación sectorial</a>
-            <a class="nav-link" data-section="tamano-empresas" href="#">Tamaño de empresa</a>
-            <a class="nav-link" data-section="distribucion-general" href="#">Distribución de registros</a>
         </div>
     </nav>
-
     <div class="container">
-        <section id="crecimiento-historico" class="section active">
-            <h2 class="section-title">Crecimiento histórico de empresas APL</h2>
+        <section id="sectores-economicos" class="section active">
+            <h2 class="section-title">Participación de empresas con sellos APL por sector económico en la región de Los Ríos</h2>
+            <p class="description">Distribución porcentual de instalaciones en adhesión y certificación combinadas para los principales sectores económicos.</p>
+            <div id="chart-sectores" style="height: 640px;"></div>
+        </section>
+
+        <section id="distribucion-general" class="section">
+            <h2 class="section-title">Distribución acumulada de instalaciones y empresas con sellos APL en la región de Los Ríos</h2>
+            <p class="description">Totales consolidados de instalaciones y empresas que han adherido o certificado Acuerdos de Producción Limpia.</p>
+            <div id="chart-distribucion" style="height: 580px;"></div>
+        </section>
+
+        <section id="tamano-empresas" class="section">
+            <h2 class="section-title">Instalaciones y empresas con sellos APL por tamaño de empresa en la región de Los Ríos</h2>
+            <p class="description">El ancho de cada columna representa el número de instalaciones y la altura el total de empresas registradas.</p>
+            <div id="chart-tamano" style="height: 640px;"></div>
+        </section>
+
+        <section id="crecimiento-historico" class="section">
+            <h2 class="section-title">Crecimiento histórico de empresas APL en la región de Los Ríos</h2>
             <p class="description">Número de empresas que han adherido o certificado APL desde 2002. Se utiliza escala logarítmica para resaltar los saltos de crecimiento.</p>
             <div id="chart-crecimiento" style="height: 600px;"></div>
         </section>
 
         <section id="series-ambito" class="section">
-            <h2 class="section-title">Empresas adheridas y certificadas por año</h2>
+            <h2 class="section-title">Empresas adheridas y certificadas por año en sellos APL en la región de Los Ríos</h2>
             <p class="description">Comparativo entre empresas que firmaron acuerdos de adhesión y las que obtuvieron certificación para cada año con datos del registro procesado CORFO.</p>
             <div id="chart-series" style="height: 560px;"></div>
-        </section>
-
-        <section id="sectores-economicos" class="section">
-            <h2 class="section-title">Participación por sector económico</h2>
-            <p class="description">Distribución porcentual de instalaciones en adhesión y certificación combinadas para los principales sectores económicos.</p>
-            <div id="chart-sectores" style="height: 640px;"></div>
-        </section>
-
-        <section id="tamano-empresas" class="section">
-            <h2 class="section-title">Empresas e instalaciones por tamaño de empresa</h2>
-            <p class="description">El ancho de cada columna representa el número de instalaciones y la altura el total de empresas registradas.</p>
-            <div id="chart-tamano" style="height: 640px;"></div>
-        </section>
-
-        <section id="distribucion-general" class="section">
-            <h2 class="section-title">Distribución acumulada de instalaciones y empresas</h2>
-            <p class="description">Totales consolidados de instalaciones y empresas que han adherido o certificado Acuerdos de Producción Limpia.</p>
-            <div id="chart-distribucion" style="height: 580px;"></div>
         </section>
     </div>
 
